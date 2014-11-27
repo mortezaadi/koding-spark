@@ -1,25 +1,16 @@
 package ir.cafebabe.koding;
 
-import static spark.Spark.*;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import ir.cafebabe.koding.ioc.IocInitializer;
+import ir.cafebabe.koding.rest.RestApplication;
+
 
 public class HelloWorld {
-    public static void main(String[] args) {
-        
-        setPort(80);
-        staticFileLocation("/public");
-        
-        get("/", (req, res) -> {
-            res.redirect("/index.html");
-            return null;
-        });
-        
-        get("/json", "application/json", (request, response) -> {
-                return "{\"message\": \"This is a JSON\"}";
-        });
-        
-        exception(Exception.class, (e, request, response) -> {
-            response.status(404);
-            response.body("Resource not found");
-        });
-    }
+	
+	public static void main(String[] args) {
+		Injector injector = Guice.createInjector(new IocInitializer());
+		injector.getInstance(RestApplication.class).start(80);
+	}
 }
