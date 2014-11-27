@@ -2,7 +2,7 @@ koding-spark
 ============
 Sample application to use in [koding](http://www.koding.com "Koding").     
 
-This is a HelloWorld javaspark sample application. to demonstrate running a simple Java application on [Koding.com](http://www.koding.com "koding") VMs. In the low resource environment like the VMs in koding, **being light** is so important so instead of running a full feature web containers/framework like Tomcat or Spring. going with spark and guice make the life and of course your application easier.  
+This is a HelloWorld javaspark sample application. to demonstrate running a simple Java application on [Koding.com](http://www.koding.com "koding") VMs. In the low resource environment like the VMs in koding(1GB Ram, 1Core, 3GB Disk), **being light** is so important so instead of running a full feature web containers/framework like Tomcat or Spring. going with spark and guice make the life and of course your application easier.  
    
    
 [Spark](http://sparkjava.com/ "Spark") is a simple and lightweight Java web framework built for rapid development.(Note: Spark **is not** Apache Spark)
@@ -40,7 +40,7 @@ This is a HelloWorld javaspark sample application. to demonstrate running a simp
 
 How To Run
 -------------
-	$sudo mvn clean install
-	$sudo mvn exec:java
+		$sudo mvn clean install
+		$sudo mvn exec:java
 
 opening port under 1024 in koding.com requires administrative privileges. 

@@ -1,4 +1,4 @@
-package ir.cafebabe.test;
+package ir.cafebabe.koding;
 
 import static spark.Spark.*;
 
@@ -6,7 +6,7 @@ public class HelloWorld {
     public static void main(String[] args) {
         
         setPort(80);
-        externalStaticFileLocation("/home/mortezaadi/Web/");
+        staticFileLocation("/public");
         
         get("/", (req, res) -> {
             res.redirect("/index.html");
