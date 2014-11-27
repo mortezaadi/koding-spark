@@ -11,6 +11,6 @@ public class HelloWorld {
 	
 	public static void main(String[] args) {
 		Injector injector = Guice.createInjector(new IocInitializer());
-		injector.getInstance(RestApplication.class).start(80);
+		injector.getInstance(RestApplication.class).start();
 	}
 }
