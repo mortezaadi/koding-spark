@@ -1,12 +1,11 @@
 package ir.cafebabe.koding.json;
 
-import spark.ResponseTransformer;
-
 import com.google.gson.Gson;
+import spark.ResponseTransformer;
 
 public class JsonTransformer implements ResponseTransformer {
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public String render(Object model) {

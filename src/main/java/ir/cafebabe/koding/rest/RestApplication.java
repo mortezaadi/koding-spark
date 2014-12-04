@@ -1,66 +1,66 @@
 package ir.cafebabe.koding.rest;
 
-import static spark.Spark.*;
+import ir.cafebabe.koding.services.spi.StatusService;
+import spark.ResponseTransformer;
 
 import javax.inject.Inject;
 
-import spark.ResponseTransformer;
-import ir.cafebabe.koding.services.spi.StatusService;
+import static spark.Spark.*;
 
 public class RestApplication {
 
-	private StatusService statusService;
-	private ResponseTransformer transformer;
-	
-	@Inject
-	public RestApplication(StatusService statusService, ResponseTransformer transformer) {
-		this.statusService = statusService;
-		this.transformer = transformer;
-	}
-	
-	public void start() {
-		start(null);
-	}
-	
-	public void start(Integer port) {
-		initServer(port);
-		initRequestFilter();
-		initBindings();
-		initExceptionHandling();
-	}
-	
-	private void initRequestFilter(){
-		//TODO: Auth filter
-	}
-	
-	private void initServer(Integer port) {
-		if (port != null)
-			setPort(port);
-		
-		staticFileLocation("/public");
-	}
-	
-	private void initBindings() {
-		get("/", (req, res) -> {
-			res.redirect("/index.html");
-			return "";
-		});
+    private final StatusService statusService;
+    private final ResponseTransformer transformer;
 
-		get("/json", "application/json", (request, response) -> {
-			return "{\"message\": \"This is a JSON\"}";
-		});
+    @Inject
+    public RestApplication(StatusService statusService, ResponseTransformer transformer) {
+        this.statusService = statusService;
+        this.transformer = transformer;
+    }
 
-		get("/status", "application/json", (request, response) -> {
-			return statusService.getSystemInformation();
-		}, transformer );
+    public void start() {
+        start(null);
+    }
 
-	}
-	
-	private void initExceptionHandling(){
-		exception(Exception.class, (e, request, response) -> {
-			response.status(404);
-			response.body("Resource not found");
-		});
-	}
+    public void start(Integer port) {
+        initServer(port);
+        initRequestFilter();
+        initBindings();
+        initExceptionHandling();
+    }
+
+    private void initRequestFilter() {
+        //TODO: Auth filter
+    }
+
+    private void initServer(Integer port) {
+        if (port != null)
+            setPort(port);
+
+        staticFileLocation("/public");
+    }
+
+    private void initBindings() {
+        get("/", (req, res) -> {
+            res.redirect("/index.html");
+            return "";
+        });
+
+        get("/json", "application/json", (request, response) -> {
+            return "{\"message\": \"This is a JSON\"}";
+        });
+
+        get("/status", "application/json", (request, response) -> {
+            return statusService.getSystemInformation();
+        }, transformer);
+
+    }
+
+    private void initExceptionHandling() {
+        exception(Exception.class, (e, request, response) -> {
+            response.status(404);
+            response.body("Resource not found");
+        });
+    }
 
 }
