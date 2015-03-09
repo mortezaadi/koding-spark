@@ -33,7 +33,7 @@ This is a HelloWorld javaspark sample application. to demonstrate running a simp
 
 6. clone this sample.
 
-		$git clone https://github.com/mortezaadi/koding-spark.git
+		$git clone https://github.com/mortezaadi/koding-spark.git --branch amir --single-branch
 
 7. go to the cloned directory and run the app.
 
